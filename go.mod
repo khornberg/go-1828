@@ -1,4 +1,4 @@
-module 1828
+module dictionary
 
 go 1.24.2
 
