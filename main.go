@@ -45,5 +45,10 @@ func main() {
 	if err != nil {
 		fmt.Println("There was an error", err)
 	}
-	PrintWord(word.Definition)
+	PrintHeader("Webster's 1828 Dictionary\n")
+	PrintWord(word.Definition, "cyan")
+
+	done := make(chan bool, 1)
+	go thesaurus(arg, done)
+	<-done
 }

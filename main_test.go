@@ -52,12 +52,40 @@ func TestFormatArgument(t *testing.T) {
 }
 
 func FuzzFormatArgument(f *testing.F) {
-    f.Add("hello")
-    f.Fuzz(func(t *testing.T, arg string) {
-        _, err := formatArgument(arg)
-        if err != nil {
-            t.Fatalf("Formatted argument different than expected %v", arg)
-        }
-    })
+	f.Add("hello")
+	f.Fuzz(func(t *testing.T, arg string) {
+		_, err := formatArgument(arg)
+		if err != nil {
+			t.Fatalf("Formatted argument different than expected %v", arg)
+		}
+	})
 }
 
+func sliceEqual(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func TestThesaurus(t *testing.T) {
+	want_word := "ant"
+	expected := []string{"automobilist", "motorist"}
+	entries, err := fetchThesaurus(want_word)
+	if err != nil {
+		t.Errorf("error in fetchThesaurus %v", err)
+	}
+	for _, entry := range entries {
+		for _, syn := range entry.Meta.Synonyms {
+			ok := sliceEqual(syn, expected)
+			if !ok {
+				t.Errorf("unexpected synonyms %v; expected %v", syn, expected)
+			}
+		}
+	}
+}

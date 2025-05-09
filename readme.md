@@ -6,7 +6,7 @@
 Find the definition of a word
 
 ```
-> 1828 cat
+> dictionary cat
 ```
 
 Prints
@@ -20,3 +20,14 @@ The wild cat of Europe is of the same species with the domestic cat; the catamou
 4.  A double tripod having six feet.
 Cat of nine tails, an instrument of punishment, consisting of nine pieces of line or cord fastened to a piece of thick rope, and having three knots at intervals, used to flog offenders on board of ships.
 ```
+
+
+### Include a thesaurus
+
+Follow the instructions on [Meriam-Webster's site](https://dictionaryapi.com)
+
+Set the api key as an environmental variable of `MW_API_KEY`
+
+Run the binary
+
+A new section will appear below the 1828 definition, with the definition and the synonyms
